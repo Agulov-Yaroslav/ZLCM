@@ -1,0 +1,31 @@
+*&---------------------------------------------------------------------*
+*& Report ZLCM
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ZLCM.
+
+DATA: lv_lcm TYPE i,
+      lv_loop TYPE i.
+
+SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE TEXT-001.
+
+  PARAMETERS: lv_firn TYPE i,
+            lv_secn TYPE i.
+SELECTION-SCREEN END OF BLOCK B1.
+
+lv_loop = lv_firn.
+
+WHILE lv_loop > 1.
+
+  IF lv_firn Mod lv_loop = 0 AND lv_secn Mod lv_loop = 0.
+    lv_lcm = lv_loop.
+   ENDIF.
+   lv_loop = lv_loop - 1.
+ENDWHILE.
+
+IF lv_lcm = 0.
+  WRITE: 'no common divisor. Only "1"'.
+  ELSE.
+    WRITE: 'The least common multiple (LCM) of the two numbers:', lv_lcm.
+ENDIF.
